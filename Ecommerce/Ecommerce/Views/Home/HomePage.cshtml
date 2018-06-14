@@ -1,0 +1,93 @@
+﻿
+@model IEnumerable<Ecommerce.Models.Category>
+
+@using Ecommerce.Models
+@{
+    ViewBag.Title = "ShoppingCart";
+}
+
+<style>
+    #product_container {
+        position:relative;
+        left:100px;
+
+
+    }
+    #product_name{
+        position:relative;
+        top:80px;
+    }
+    #product_line{
+        position:relative;
+        right:100px;
+    }
+    #product_image {
+        border-radius:8px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        position:relative;
+        top:-25px;
+    }
+    #header_value{
+        position:relative;
+        top:15px;
+        left:380px;
+    }
+    #categories_span{
+        position:relative;
+        left:22px;
+    }
+    #category_name{
+        display:block;
+        margin-top:auto;
+        margin-bottom:auto;
+        position:relative;
+        left:20px;
+    }
+</style>
+
+<h2 id="header_value">Welcome to Shopping Cart</h2>
+
+@*Welcome user @ViewBag.Username @ViewBag.UserId*@
+
+<div>
+    <span id="categories_span">Best Categories</span>
+    <hr />
+
+    @foreach (var item in Model)
+    {
+    <h4 id="category_name">@Html.ActionLink(@item.Category_name, "Details", new { id = item.Category_id })</h4>
+        <hr />
+        <br />
+        int i = 0;
+        foreach (var item1 in item.Products)
+        {
+            if (i == 3)
+            {
+                break;
+            }
+        <div id="product_container">
+
+            <span id="product_name"> @Html.ActionLink(item1.Product_name, "ShowProduct", new { productId = item1.Product_id }) </span>
+            <img id="product_image" src=@item1.Image height="200" width="150">
+                
+            <hr id="product_line">
+        </div>    
+            i++;
+            <br />
+
+        }
+
+    }
+
+
+
+
+</div>
+
+
+
+
+
+

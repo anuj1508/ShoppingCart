@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="Cart_Id" />
+    </Key>
+    <Property Name="Cart_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Shopping Portal.dbo.Cart_Item' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Cart_Item">
+    <Key>
+      <PropertyRef Name="Cart_Id" />
+      <PropertyRef Name="Map_Id" />
+      <PropertyRef Name="Quantity" />
+    </Key>
+    <Property Name="Cart_Id" Type="int" Nullable="false" />
+    <Property Name="Map_Id" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CartDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cart_id" Type="int" Nullable="false" />
+    <Property Name="Map_id" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_id" />
+    </Key>
+    <Property Name="Category_id" Type="int" Nullable="false" />
+    <Property Name="Category_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Customer_id" />
+    </Key>
+    <Property Name="Customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Customer_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone_number" Type="varchar" MaxLength="10" />
+    <Property Name="Email_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_Item">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_id" Type="int" Nullable="false" />
+    <Property Name="Map_id" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Order_id" />
+    </Key>
+    <Property Name="Order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_id" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Total" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="int" Nullable="false" />
+    <Property Name="Product_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Category_id" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ProductMap">
+    <Key>
+      <PropertyRef Name="Map_id" />
+    </Key>
+    <Property Name="Map_id" Type="int" Nullable="false" />
+    <Property Name="Product_id" Type="int" Nullable="false" />
+    <Property Name="Variant_id" Type="int" Nullable="false" />
+    <Property Name="Product_price" Type="float" Nullable="false" />
+    <Property Name="Stock" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Variant">
+    <Key>
+      <PropertyRef Name="Variant_id" />
+    </Key>
+    <Property Name="Variant_id" Type="int" Nullable="false" />
+    <Property Name="Variant" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cart_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Item_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="Cart_Item" Type="Self.Cart_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="Cart_Id" />
+      </Principal>
+      <Dependent Role="Cart_Item">
+        <PropertyRef Name="Cart_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Item_ProductMap">
+    <End Role="ProductMap" Type="Self.ProductMap" Multiplicity="1" />
+    <End Role="Cart_Item" Type="Self.Cart_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductMap">
+        <PropertyRef Name="Map_id" />
+      </Principal>
+      <Dependent Role="Cart_Item">
+        <PropertyRef Name="Map_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetails_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="Cart_Id" />
+      </Principal>
+      <Dependent Role="CartDetails">
+        <PropertyRef Name="Cart_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetails_ProductMap">
+    <End Role="ProductMap" Type="Self.ProductMap" Multiplicity="1" />
+    <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductMap">
+        <PropertyRef Name="Map_id" />
+      </Principal>
+      <Dependent Role="CartDetails">
+        <PropertyRef Name="Map_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Item_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Order_Item">
+        <PropertyRef Name="Order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Item_ProductMap">
+    <End Role="ProductMap" Type="Self.ProductMap" Multiplicity="1" />
+    <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductMap">
+        <PropertyRef Name="Map_id" />
+      </Principal>
+      <Dependent Role="Order_Item">
+        <PropertyRef Name="Map_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMap_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductMap" Type="Self.ProductMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="ProductMap">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMap_Variant">
+    <End Role="Variant" Type="Self.Variant" Multiplicity="1" />
+    <End Role="ProductMap" Type="Self.ProductMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Variant">
+        <PropertyRef Name="Variant_id" />
+      </Principal>
+      <Dependent Role="ProductMap">
+        <PropertyRef Name="Variant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EcommerceModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartDetails" EntityType="Self.CartDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Item" EntityType="Self.Order_Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductMap" EntityType="Self.ProductMap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart_Item" EntityType="Self.Cart_Item" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Cart_Item].[Cart_Id] AS [Cart_Id], 
+    [Cart_Item].[Map_Id] AS [Map_Id], 
+    [Cart_Item].[Quantity] AS [Quantity]
+    FROM [dbo].[Cart_Item] AS [Cart_Item]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Item_Cart" Association="Self.FK_Cart_Item_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="Cart_Item" EntitySet="Cart_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Item_ProductMap" Association="Self.FK_Cart_Item_ProductMap">
+      <End Role="ProductMap" EntitySet="ProductMap" />
+      <End Role="Cart_Item" EntitySet="Cart_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetails_Cart" Association="Self.FK_CartDetails_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="CartDetails" EntitySet="CartDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetails_ProductMap" Association="Self.FK_CartDetails_ProductMap">
+      <End Role="ProductMap" EntitySet="ProductMap" />
+      <End Role="CartDetails" EntitySet="CartDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Item_Orders" Association="Self.FK_Order_Item_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Item" EntitySet="Order_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Item_ProductMap" Association="Self.FK_Order_Item_ProductMap">
+      <End Role="ProductMap" EntitySet="ProductMap" />
+      <End Role="Order_Item" EntitySet="Order_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMap_Product" Association="Self.FK_ProductMap_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductMap" EntitySet="ProductMap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMap_Variant" Association="Self.FK_ProductMap_Variant">
+      <End Role="Variant" EntitySet="Variant" />
+      <End Role="ProductMap" EntitySet="ProductMap" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

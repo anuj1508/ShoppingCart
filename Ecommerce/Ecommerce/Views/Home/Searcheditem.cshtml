@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<Ecommerce.Models.Product>
+@{
+    ViewBag.Title = "Searcheditem";
+}
+
+<h2>Searcheditem</h2>
+
+@if (Model == null)
+{
+    @ViewBag.ErrorMessage
+
+}
+@if (Model != null)
+{
+    foreach (var itemsearched in Model)
+    {
+        @Html.DisplayFor(modelItem => itemsearched.Product_name)
+
+        @Html.DisplayFor(modelItem => itemsearched.Image)
+        <img src=@itemsearched.Image height="200" width="150">
+        <br />
+
+    }
+}

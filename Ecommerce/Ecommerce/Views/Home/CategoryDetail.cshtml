@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Ecommerce.Models.ProductMap>
+
+@{
+    ViewBag.Title = "CategoryDetail";
+}
+
+<h2>CategoryDetail</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Product_name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Variant.Variant1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_price)
+        </th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(item1 => item.Product.Product_name)
+            </td>
+
+            <td>
+                <img src=@item.Product.Image height="100" width="100">
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(item1 => item.Variant.Variant1)
+            </td>
+
+            <td>
+                @Html.DisplayFor(item1 => item.Product_price)
+            </td>
+            @*<td>
+                    <img src="@item.Image" height="200" width="150">
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>*@
+
+            <td>
+                @Html.ActionLink("View Details", "ShowProduct", new { productId = item.Product_id }) 
+            </td>
+        </tr>
+    }
+
+</table>

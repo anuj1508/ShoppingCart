@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Home Page</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #search_item_span {
+            position: relative;
+            top: 13px;
+        }
+
+        #search_term {
+            position: relative;
+            top: 13px;
+        }
+
+        #login {
+            position: relative;
+            top: 16px;
+            left: 20px;
+        }
+
+        #signup {
+            position: relative;
+            top: 16px;
+            left: 30px;
+        }
+
+        #my_order {
+            position: relative;
+            top: 16px;
+            left: 40px;
+        }
+
+        #home_link {
+            position: relative;
+            top: 14px;
+        }
+
+        #logout {
+            position: relative;
+            top: 16px;
+            left: 30px;
+        }
+
+        #cart {
+            position: relative;
+            top: 16px;
+            left: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span id="home_link">@Html.ActionLink("ShoppingCart", "HomePage", "Home", new { area = "" }, new { @class = "navbar-brand" })</span>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @using (Html.BeginForm("Search", "Home"))
+                        {
+                            <p>
+                                <span id="search_item_span" style="color:white;font:500;font-weight:bold">Search item: @Html.TextBox("SearchString")</span>
+                                <input id="search_term" type="submit" value="Search" />
+                            </p>
+                        }
+                    </li>
+                </ul>
+
+                @{
+                    if (Session["UserId"] == null)
+                    {
+
+                        <span id="login">@Html.ActionLink("Login", "Login", "Customers");</span>
+
+                        <span id="signup" style="color:white;font:500;font-weight:bold">@Html.ActionLink("Signup", "signup", "Customers")</span>
+                    }
+                    else
+                    {
+                        <span id="logout">@Html.ActionLink("LogOut", "Logout", "Customers");</span>
+                        <span id="cart">@Html.ActionLink("My Cart", "ViewCart", "CartDetails")</span>
+                    }
+                }
+
+                <span id="my_order">@Html.ActionLink("MyOrders", "MyOrders", "Orders");</span>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

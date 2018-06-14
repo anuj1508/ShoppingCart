@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Ecommerce.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Customer_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Customer_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Customer_id })
+            </td>
+        </tr>
+    }
+
+</table>

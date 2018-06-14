@@ -1,0 +1,59 @@
+﻿@model Ecommerce.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Customer_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

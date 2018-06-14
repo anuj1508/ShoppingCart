@@ -1,0 +1,62 @@
+﻿@model Ecommerce.Models.ProductMap
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductMap</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Image)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Product.Image)*@
+            <img id="product_image" src=@Model.Product.Image height="200" width="150">
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Variant.Variant1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Variant.Variant1)
+        </dd>
+
+    </dl>
+</div>
+
+@ViewBag.countMessage
+
+<p>
+    @Html.ActionLink("Add to Cart", "AddToCart", new { id = Model.Map_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

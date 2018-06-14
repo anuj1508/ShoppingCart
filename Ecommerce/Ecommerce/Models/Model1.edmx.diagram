@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4996545678e43e48c1b17a8e077ac43" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="EcommerceModel.Cart" Width="1.5" PointX="7.875" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.CartDetail" Width="1.5" PointX="11.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Category" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Customer" Width="1.5" PointX="7.875" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Order_Item" Width="1.5" PointX="4.625" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Order" Width="1.5" PointX="7.875" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Product" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.ProductMap" Width="1.5" PointX="5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.sysdiagram" Width="1.5" PointX="15.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Variant" Width="1.5" PointX="1.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Cart_Item" Width="1.5" PointX="4.75" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="EcommerceModel.FK_Cart_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Cart_Item_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_CartDetails_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_CartDetails_ProductMap" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Orders_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Order_Item_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Order_Item_ProductMap" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_ProductMap_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_Cart_Item_ProductMap" ManuallyRouted="false" />
+        <AssociationConnector Association="EcommerceModel.FK_ProductMap_Variant" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
